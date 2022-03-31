@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    
     Rigidbody2D rb;
     Animator animator;
     SpriteRenderer sr;
@@ -29,9 +30,15 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        if (Input.GetAxis("Horizontal") > 0)
+        if (Input.GetAxis("Horizontal") == 0)
+        {
+            animator.SetInteger("Dir", 0);
+            //return;
+        }
+        else if (Input.GetAxis("Horizontal") > 0)
         {
             rb.velocity = new Vector2(1f, rb.velocity.y);
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
             animator.SetInteger("Dir", 1);  // Sets the animation
         }
         else if (Input.GetAxis("Horizontal") < 0)
@@ -40,11 +47,10 @@ public class PlayerMovement : MonoBehaviour
             transform.localRotation = Quaternion.Euler(0, 180, 0);  // Rotating sprite to other side
             animator.SetInteger("Dir", -1);
         }
-        else
+       else
         {
             rb.velocity = new Vector2(0f, rb.velocity.y);
-            animator.SetInteger("Dir", 0);
-            transform.localRotation = Quaternion.Euler(0, 0, 0);
+           // transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
     }
 
