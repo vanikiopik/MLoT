@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
     public float smoothTime = 0.2f;
     private Vector2 velocity = Vector2.zero;
     
-    void LateUpdate()
+    void FixedUpdate()
     {
         //Camera will move forward to the connected object
         if (target)
